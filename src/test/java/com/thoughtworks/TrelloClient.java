@@ -21,8 +21,8 @@ public class TrelloClient {
                         .header("Content-Type","json")
                 .queryParam("name","My Board")
                 .queryParam("defaultLists","false")
-                .queryParam("key","7cf9c0a884ce4fe5367c569404f363dc")
-                .queryParam("token","ed12559cb94109ff2042ad408f24d1b39586cc4b06583742833cf67eac0777c9")
+                .queryParam("key","<--key-->}")
+                .queryParam("token","<--token>")
                 .post("/1/Boards/");
 
         Assert.assertTrue(response.statusCode()==200);
