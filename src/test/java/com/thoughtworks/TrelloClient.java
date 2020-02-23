@@ -1,5 +1,6 @@
 package com.thoughtworks;
 
+import com.thoughtworks.Utility.Properties;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
@@ -15,14 +16,14 @@ public class TrelloClient {
 
     @Test
     public void ValidateTheBoardIsCreated() throws URISyntaxException {
-        RestAssured.baseURI="https://api.trello.com";
+        RestAssured.baseURI= Properties.baseURL;
         Response response =
                 given().when()
                         .header("Content-Type","json")
-                .queryParam("name","My Board")
+                .queryParam("name","My New Board")
                 .queryParam("defaultLists","false")
-                .queryParam("key","<--key-->}")
-                .queryParam("token","<--token>")
+                .queryParam("key",Properties.apiKEY)
+                .queryParam("token",Properties.token)
                 .post("/1/Boards/");
 
         Assert.assertTrue(response.statusCode()==200);
