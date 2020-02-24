@@ -29,4 +29,16 @@ public class TrelloClient {
         Assert.assertTrue(response.statusCode()==200);
 
     }
+
+    @Test
+    public void ValidateTheBoardRetrivedSuccessfully() throws URISyntaxException {
+        RestAssured.baseURI= Properties.baseURL;
+        Response response =
+                given().when()
+                        .header("Content-Type","json")
+                        .queryParam("key",Properties.apiKEY)
+                        .queryParam("token",Properties.token)
+                        .get("1/Boards/5e535c9c44ebaa0f1fc86992");
+        Assert.assertTrue(response.statusCode()==200);
+    }
 }
