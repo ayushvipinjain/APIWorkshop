@@ -3,7 +3,7 @@
 <suite name="API Automation Suite">
     <test name="Automated Tests" verbose="1">
         <classes>
-            <class name="com.thoughtworks.TrelloClient"></class>
+            <class name="com.thoughtworks.actions.TrelloClient"></class>
         </classes>
     </test>
 </suite>

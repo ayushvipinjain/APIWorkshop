@@ -1,5 +1,6 @@
-package com.thoughtworks;
+package com.thoughtworks.actions;
 
+import com.thoughtworks.UrlMapper;
 import com.thoughtworks.framework.APIClient;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TrelloClient {
+public class TrelloClient extends TrelloBase{
 
     @Test
     public void ValidateTheBoardCreatedSuccessfully() throws URISyntaxException {
@@ -25,16 +26,14 @@ public class TrelloClient {
 
     @Test
     public void ValidateTheBoardRetrivedSuccessfully() throws URISyntaxException {
-        String boardID = "5e535c9c44ebaa0f1fc86992";
-        Response response = APIClient.getRequest(String.format(UrlMapper.GETBOARD.getUrlPath(),boardID));
+        Response response = APIClient.getRequest(String.format(UrlMapper.GETBOARD.getUrlPath(),testBoard));
         Assert.assertEquals(APIClient.getStatusCode(response),200);
-        Assert.assertEquals(APIClient.getValueFromPath(response,"id"),boardID);
+        Assert.assertEquals(APIClient.getValueFromPath(response,"id"),testBoard);
     }
 
     @Test
     public void ValidateBoardUpdatedSuccessfully(){
 
-        String boardID="5e535c9c44ebaa0f1fc86992";
         String newBoardName ="Board_" + LocalDateTime.now().toString();
         String newDescription = "Desc_" + LocalDateTime.now().toString();
 
@@ -42,7 +41,7 @@ public class TrelloClient {
         queryParams.put("name",newBoardName);
         queryParams.put("desc",newDescription);
 
-        Response response =APIClient.updateRequest(String.format(UrlMapper.UPDATEBOARD.getUrlPath(),boardID),queryParams);
+        Response response =APIClient.updateRequest(String.format(UrlMapper.UPDATEBOARD.getUrlPath(),testBoard),queryParams);
         Assert.assertEquals(APIClient.getStatusCode(response),200);
         Assert.assertEquals(APIClient.getValueFromPath(response,"name"),newBoardName);
         Assert.assertEquals(APIClient.getValueFromPath(response,"desc"),newDescription);
