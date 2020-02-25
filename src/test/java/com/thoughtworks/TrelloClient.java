@@ -1,44 +1,42 @@
 package com.thoughtworks;
 
 import com.thoughtworks.Utility.Properties;
+import com.thoughtworks.framework.APIClient;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
+import io.restassured.matcher.ResponseAwareMatcher;
 import io.restassured.response.Response;
+import org.hamcrest.Matcher;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.util.*;
 import static io.restassured.RestAssured.given;
 
 public class TrelloClient {
 
     @Test
-    public void ValidateTheBoardIsCreated() throws URISyntaxException {
-        RestAssured.baseURI= Properties.baseURL;
-        Response response =
-                given().when()
-                        .header("Content-Type","json")
-                .queryParam("name","My New Board")
-                .queryParam("defaultLists","false")
-                .queryParam("key",Properties.apiKEY)
-                .queryParam("token",Properties.token)
-                .post("/1/Boards/");
+    public void ValidateTheBoardCreatedAndRetirvedSuccessfully() throws URISyntaxException {
 
-        Assert.assertTrue(response.statusCode()==200);
+        String boardName  = "API Learning Workshop";
+        Map<String,String> queryParams = new HashMap();
+        queryParams.put("name",boardName);
+        queryParams.put("defaultLists","false");
+        Response response =APIClient.postRequest(UrlMapper.CREATEBOARD.getUrlPath(),queryParams);
+        Assert.assertEquals(APIClient.getStatusCode(response),200);
+        Assert.assertEquals(APIClient.getValueFromPath(response,"name"),boardName);
+
+
 
     }
 
     @Test
     public void ValidateTheBoardRetrivedSuccessfully() throws URISyntaxException {
-        RestAssured.baseURI= Properties.baseURL;
-        Response response =
-                given().when()
-                        .header("Content-Type","json")
-                        .queryParam("key",Properties.apiKEY)
-                        .queryParam("token",Properties.token)
-                        .get("1/Boards/5e535c9c44ebaa0f1fc86992");
-        Assert.assertTrue(response.statusCode()==200);
+        String boardID = "5e535c9c44ebaa0f1fc86992";
+        Response response = APIClient.getRequest(String.format(UrlMapper.GETBOARD.getUrlPath(),boardID));
+        Assert.assertEquals(APIClient.getStatusCode(response),200);
+        Assert.assertEquals(APIClient.getValueFromPath(response,"id"),boardID);
     }
 }
