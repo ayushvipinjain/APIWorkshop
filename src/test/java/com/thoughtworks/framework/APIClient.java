@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.reset;
 import static io.restassured.config.EncoderConfig.encoderConfig;
 
 public class APIClient {
@@ -35,8 +36,20 @@ public class APIClient {
             Response response = getRequestSpecification()
                     .queryParams(queryParams)
                     .post(URI);
-            System.out.println( response.body().prettyPrint());
             return response;
+    }
+
+    public static Response updateRequest(String uriPath,Map<String,String> queryParams){
+        Response response =getRequestSpecification()
+                .queryParams(queryParams)
+                .put(uriPath);
+        return response;
+    }
+
+    public static Response deleteRequest(String uriPath){
+       Response response = getRequestSpecification()
+                .delete(uriPath);
+       return response;
     }
 
     public static int getStatusCode(Response response){
