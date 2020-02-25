@@ -32,17 +32,11 @@ public class APIClient {
     }
 
     public static Response postRequest(String URI,Map<String, String> queryParams) {
-
-        try {
             Response response = getRequestSpecification()
                     .queryParams(queryParams)
                     .post(URI);
             System.out.println( response.body().prettyPrint());
             return response;
-
-        } catch (Exception ex) {
-           throw new NullPointerException();
-        }
     }
 
     public static int getStatusCode(Response response){
