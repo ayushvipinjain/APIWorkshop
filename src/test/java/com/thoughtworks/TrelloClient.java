@@ -1,19 +1,12 @@
 package com.thoughtworks;
 
-import com.thoughtworks.Utility.Properties;
 import com.thoughtworks.framework.APIClient;
-import io.restassured.RestAssured;
-import io.restassured.http.Header;
-import io.restassured.matcher.ResponseAwareMatcher;
 import io.restassured.response.Response;
-import org.hamcrest.Matcher;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
-import static io.restassured.RestAssured.given;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TrelloClient {
 
@@ -27,9 +20,6 @@ public class TrelloClient {
         Response response =APIClient.postRequest(UrlMapper.CREATEBOARD.getUrlPath(),queryParams);
         Assert.assertEquals(APIClient.getStatusCode(response),200);
         Assert.assertEquals(APIClient.getValueFromPath(response,"name"),boardName);
-
-
-
     }
 
     @Test
