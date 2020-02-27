@@ -1,0 +1,23 @@
+[
+  {
+    "name" : "Backlog"
+  },
+  {
+    "name" : "In Analysis"
+  },
+  {
+    "name" : "In Dev"
+  },
+  {
+    "name" : "Ready For QA"
+  },
+  {
+    "name" : "In QA"
+  },
+  {
+    "name" : "QA Done"
+  },
+  {
+    "name" : "Ready For PO Sign Off"
+  }
+]
