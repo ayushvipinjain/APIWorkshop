@@ -28,5 +28,4 @@ public class JsonUtils {
     public static Object convertFromJson(String json, Type type){
         return new Gson().fromJson(json ,type);
     }
-
 }

@@ -8,6 +8,8 @@ import com.thoughtworks.models.BoardList;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -73,5 +75,15 @@ public class TrelloClient extends TrelloBase{
         Response response =postRequest(UriMapper.CREATELIST.getUriPath(),queryParams);
         BoardList boardList = (BoardList) JsonUtils.convertFromJson(getResponseAsString(response),BoardList.class);
         Assert.assertEquals(boardList.getName(),list);
+    }
+
+    @Test(dataProvider = "boardList")
+    public void validateJsonSchemaForListCreation(String list) throws FileNotFoundException {
+
+        Map<String,String> queryParams = new HashMap();
+        queryParams.put("name",list);
+        queryParams.put("idBoard",testBoard);
+        Response response =postRequest(UriMapper.CREATELIST.getUriPath(),queryParams);
+        validateJsonSchema(response, "listSchema.json");
     }
 }

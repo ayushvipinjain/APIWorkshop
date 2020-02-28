@@ -2,17 +2,14 @@ package com.thoughtworks.framework;
 
 import com.thoughtworks.Utility.Properties;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseLogSpecification;
 
-import java.util.List;
+import java.io.FileNotFoundException;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.reset;
-import static io.restassured.config.EncoderConfig.encoderConfig;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class APIClient {
 
@@ -61,5 +58,9 @@ public class APIClient {
     }
     public static String getResponseAsString(Response response){
         return response.thenReturn().body().asString();
+    }
+
+    public static void validateJsonSchema(Response response, String schmeFileName) throws FileNotFoundException {
+        response.then().body(matchesJsonSchemaInClasspath(schmeFileName));
     }
 }

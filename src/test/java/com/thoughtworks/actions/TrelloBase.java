@@ -32,7 +32,6 @@ public class TrelloBase {
         APIClient.deleteRequest(String.format(UriMapper.DELETEBOARD.getUriPath(),testBoard));
     }
 
-
     @DataProvider(name = "boardList", parallel = true)
     public Object[] getBoardList() throws FileNotFoundException {
         String jsonFilePath = ClassLoader.getSystemResource("list.json").getFile();
@@ -45,5 +44,4 @@ public class TrelloBase {
         }
         return list;
     }
-
 }

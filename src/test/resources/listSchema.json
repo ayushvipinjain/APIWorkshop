@@ -1,0 +1,50 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "description": "An explanation about the purpose of this instance.",
+  "required": [
+    "id",
+    "name",
+    "closed",
+    "idBoard",
+    "pos",
+    "limits"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "string",
+      "description": "An explanation about the purpose of this instance.",
+      "pattern": "^(.*)$"
+    },
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "description": "An explanation about the purpose of this instance.",
+      "pattern": "^(.*)$"
+    },
+    "closed": {
+      "$id": "#/properties/closed",
+      "type": "boolean",
+      "description": "An explanation about the purpose of this instance."
+    },
+    "idBoard": {
+      "$id": "#/properties/idBoard",
+      "type": "string",
+      "description": "An explanation about the purpose of this instance.",
+      "pattern": "^(.*)$"
+    },
+    "pos": {
+      "$id": "#/properties/pos",
+      "type": "number",
+      "description": "An explanation about the purpose of this instance."
+    },
+    "limits": {
+      "$id": "#/properties/limits",
+      "type": "object",
+      "description": "An explanation about the purpose of this instance."
+    }
+  }
+}
