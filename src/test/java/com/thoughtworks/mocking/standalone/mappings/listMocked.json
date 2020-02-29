@@ -1,0 +1,20 @@
+{
+    "request": {
+        "method": "POST",
+        "urlPathPattern": "/1/lists.*"
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "id": "5e58c086ea89a154ca0179c3",
+            "name": "Mocked_Backlog",
+            "closed": false,
+            "idBoard": "5e54b1b7685b376f1fdd0b3a",
+            "pos": 1,
+            "limits": {}
+        },
+        "headers" : {
+        "Content-Type" : "application/json"
+        }
+    }
+}
