@@ -25,11 +25,11 @@ public class ConfigReader {
     }
 
     public String getToken(){
-        return System.getProperty("TOKEN");
+        return System.getenv("TOKEN");
     }
 
     public String getAPIKey(){
-        return System.getProperty("APIKEY");
+        return System.getenv("APIKEY");
     }
 
 }

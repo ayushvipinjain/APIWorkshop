@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "c862ecf6-ace4-4609-8133-c4436cb3217e",
+		"name": "Trello",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Boards",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/members/me/boards?key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"members",
+						"me",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Specific Board",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/Boards/5e54b1b7685b376f1fdd0b3a?key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"Boards",
+						"5e54b1b7685b376f1fdd0b3a"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e64a3b58-5837-4de5-9e15-f2c7a55e45bb",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"boardID\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/Boards/?name=Training&defaultLists=false&key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"Boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Training"
+						},
+						{
+							"key": "defaultLists",
+							"value": "false"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Board",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/Boards/{{boardID}}?key={{key}}&token={{token}}&name=Training 24th Feb Updated&desc=This Board is Updated",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"Boards",
+						"{{boardID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "name",
+							"value": "Training 24th Feb Updated"
+						},
+						{
+							"key": "desc",
+							"value": "This Board is Updated"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a list onto a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84137668-8b0e-4670-810c-8c5c26ef91a7",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"List_\" + jsonData.name, jsonData.id);",
+							"",
+							"",
+							"var schema = {",
+							"    \"definitions\": {},",
+							"    \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+							"    \"$id\": \"http://example.com/root.json\",",
+							"    \"type\": \"object\",",
+							"    \"description\": \"An explanation about the purpose of this instance.\",",
+							"    \"required\": [",
+							"      \"id\",",
+							"      \"name\",",
+							"     \"closed\",",
+							"     \"idBoard\",",
+							"     \"pos\",",
+							"     \"limits\"",
+							"   ],",
+							"   \"properties\": {",
+							"      \"id\": {",
+							"       \"$id\": \"#/properties/id\",",
+							"       \"type\": \"string\",",
+							"       \"description\": \"An explanation about the purpose of this instance.\",",
+							"       \"pattern\": \"^(.*)$\"",
+							"     },",
+							"     \"name\": {",
+							"       \"$id\": \"#/properties/name\",",
+							"       \"type\": \"string\",",
+							"       \"description\": \"An explanation about the purpose of this instance.\",",
+							"       \"pattern\": \"^(.*)$\"",
+							"     },",
+							"     \"closed\": {",
+							"       \"$id\": \"#/properties/closed\",",
+							"       \"type\": \"boolean\",",
+							"       \"description\": \"An explanation about the purpose of this instance.\"",
+							"     },",
+							"     \"idBoard\": {",
+							"       \"$id\": \"#/properties/idBoard\",",
+							"       \"type\": \"string\",",
+							"       \"description\": \"An explanation about the purpose of this instance.\",",
+							"       \"pattern\": \"^(.*)$\"",
+							"     },",
+							"     \"pos\": {",
+							"       \"$id\": \"#/properties/pos\",",
+							"       \"type\": \"number\",",
+							"       \"description\": \"An explanation about the purpose of this instance.\"",
+							"     },",
+							"     \"limits\": {",
+							"       \"$id\": \"#/properties/limits\",",
+							"       \"type\": \"object\",",
+							"       \"description\": \"An explanation about the purpose of this instance.\"",
+							"     }",
+							"   }",
+							"   };",
+							"",
+							"pm.test('Schema is valid', function() {",
+							"  var result = tv4.validate(pm.response.json(), schema);",
+							"   console.log(result);",
+							"  pm.expect(result).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=Backlog&idBoard={{boardID}}&key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Backlog"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardID}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Cards In List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a91154fb-a95e-4670-9057-37b9a6283204",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"pm.environment.set(\"CardId\", jsonData.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards?name=Learn API Testing&key={{key}}&token={{token}}&idList={{List_Backlog}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Learn API Testing"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						},
+						{
+							"key": "idList",
+							"value": "{{List_Backlog}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Move Card",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/{{CardId}}/idList?value={{List_In Dev}}&key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						"{{CardId}}",
+						"idList"
+					],
+					"query": [
+						{
+							"key": "value",
+							"value": "{{List_In Dev}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Board",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/Boards/{{boardID}}?key={{key}}&token={{token}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"Boards",
+						"{{boardID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mocked _Create List on Board",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/1/lists/?name=Backlog&idBoard={{boardID}}&key={{key}}&token={{token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"1",
+						"lists",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Backlog"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{boardID}}"
+						},
+						{
+							"key": "key",
+							"value": "{{key}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
