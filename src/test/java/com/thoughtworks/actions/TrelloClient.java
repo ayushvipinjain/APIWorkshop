@@ -85,5 +85,6 @@ public class TrelloClient extends TrelloBase{
         queryParams.put("idBoard",testBoard);
         Response response =postRequest(UriMapper.CREATELIST.getUriPath(),queryParams);
         validateJsonSchema(response, "listSchema.json");
+
     }
 }
